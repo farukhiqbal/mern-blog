@@ -25,7 +25,7 @@ const DeletePost = ({postId:id}) => {
 const removePost = async () =>{
   setLoader(true)
   try{
-    const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/posts/${id}`,
+    const response = await axios.delete(`https://mern-blog-kappa-one.vercel.app/posts/${id}`,
     {withCredentials:true,headers:{Authorization: `Bearer ${token}`}})
     if(response.status == 200){
         if(location.pathname== `/myposts/${currentUser.id}`){

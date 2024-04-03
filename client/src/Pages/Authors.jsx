@@ -12,7 +12,7 @@ const Authors = () => {
    const getAuthors = async()=>{
         setLoading(true);
         try{
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/users`)
+    const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/users`)
     setAuthors(response.data);
         }catch(error){
           console.log(error)
@@ -37,7 +37,7 @@ const Authors = () => {
            {
             return  <Link key={id} to={`/posts/users/${id}`} className="author">
               <div className="author_avatar">
-                <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`} alt={`Image of ${name}`} />
+                <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${avatar}`} alt={`Image of ${name}`} />
               </div>
               <div className="author_info">
                 <h4>{name}</h4>

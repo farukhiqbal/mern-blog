@@ -1,10 +1,10 @@
 
-const {Router} = require('express')
+const express = require ('express')
 
 const {createPost,getPosts,getPost,getUserPosts,editPost,getCatPosts,deletePost, getAllPosts, } = require('../controllers/postControllers')
 const authMiddleware = require('../middleware/authMiddleware')    
 
-const router = Router()
+const router = express.Router();
 
 router.post('/',authMiddleware, createPost) 
 router.get('/',getAllPosts) 

@@ -20,7 +20,7 @@ const PostDetail = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/posts/${id}`
+          `https://mern-blog-kappa-one.vercel.app/posts/${id}`
         );
         setPost(response.data);
       
@@ -60,7 +60,7 @@ const PostDetail = () => {
 
           <h1>{post.title}</h1>
           <div className="post-detail_thumbnail">
-            <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${post.thumbnail}`} alt={post.title} />
+            <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${post.thumbnail}`} alt={post.title} />
           </div>
             <p dangerouslySetInnerHTML={{__html: post.description}}></p>
         </div>

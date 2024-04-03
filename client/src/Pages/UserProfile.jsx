@@ -28,7 +28,7 @@ try{
  
    const postData = new FormData();
    postData.set('avatar',avatar);
-   const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
+   const response = await axios.post(`https://mern-blog-kappa-one.vercel.app/users/change-avatar`,
    postData,{withCredentials:true,headers:{Authorization:`Bearer${token}`}})   
    setAvatar(response?.data.avatar)
 }catch(error){
@@ -51,7 +51,7 @@ try{
         <div className="profile_details">
           <div className="avatar_wrapper">
             <div className="profile_avatar">
-              <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${avatar}`} alt="" />
+              <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${avatar}`} alt="" />
             </div>
 
             {/* from update avatar */}

@@ -25,7 +25,7 @@ const Register = () => {
     setError('');
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/register`,
+        `https://mern-blog-kappa-one.vercel.app/users/register`,
         userData
       );
   

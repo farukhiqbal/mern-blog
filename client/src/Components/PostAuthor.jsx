@@ -16,7 +16,7 @@ const PostAuthor = ({ authorID, createdAt }) => {
     const getAuthor = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${authorID}`
+          `https://mern-blog-kappa-one.vercel.app/users/${authorID}`
         );
         setAuthor(response?.data);
       } catch (error) {
@@ -32,7 +32,7 @@ const PostAuthor = ({ authorID, createdAt }) => {
       <div className="post_author-avatar">
         {author?.avatar && (
           <img
-            src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${author.avatar}`}
+            src={`https://mern-blog-kappa-one.vercel.app/uploads/${author.avatar}`}
             alt=""
           />
         )}

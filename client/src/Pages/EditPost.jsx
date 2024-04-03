@@ -62,7 +62,7 @@ const POST_CATEGORIES = ['Agriculture','Business','Education','Entertainment','A
 useEffect(()=>{
      const getPost = async() =>{
       try{
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${id}`)
+        const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/posts/${id}`)
        setTitle(response.data.title)
        setdescription(response.data.description)
       
@@ -84,7 +84,7 @@ const editPost = async(e) =>{
   postData.set('thumbnail',thumbnail)
 
   try{
-      const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/posts/${id}`,postData,
+      const response = await axios.patch(`https://mern-blog-kappa-one.vercel.app/posts/${id}`,postData,
       {withCredentials:true,headers:{Authorization: `Bearer ${token}`}})
       if(response.status == 200){
        return navigate('/')

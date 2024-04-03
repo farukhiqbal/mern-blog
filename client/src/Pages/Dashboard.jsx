@@ -29,7 +29,7 @@ const Dashboard = () => {
           const fetchPosts = async() =>{
             setLoading(true);
             try{
-               const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/users/${id}`,
+               const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/posts/users/${id}`,
                {withCredentials:true,headers:{Authorization:`Bearer${token}`}})    
                setPosts(response.data)
             }catch(error){
@@ -60,7 +60,7 @@ const Dashboard = () => {
 return <article key={posts.id} className='dashboard_post'>
     <div className="dashboard_post-info">
       <div className="dashboard_post-thumbnail">
-        <img src={`${process.env.REACT_APP_ASSETS_URL}/uploads/${posts.thumbnail}`} alt="" />
+        <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${posts.thumbnail}`} alt="" />
       </div>
       <h5>{posts.title}</h5>
     </div>
