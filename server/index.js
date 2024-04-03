@@ -14,10 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  next();
-});
+
+
+
+app.get('/', (req, res) => {
+  res.send("server is running ")
+
+})
 
 
 
