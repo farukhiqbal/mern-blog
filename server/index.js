@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "https://mern-blog-kappa-one.vercel.app");
   next();
 });
 
