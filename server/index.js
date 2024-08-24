@@ -11,12 +11,12 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const app = express();
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: "https://futurestack.vercel.app" }));
+app.use(cors({ credentials: true, origin: "https://futurestack.vercel.app/" }));
 
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://futurestack.vercel.app"
+    "https://futurestack.vercel.app/"
   );
   next();
 });
