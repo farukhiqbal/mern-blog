@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import {  toast } from "react-toastify";
 
 const Register = () => {
   const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
   });
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const changeInputHandler = (e) => {
@@ -19,34 +20,32 @@ const Register = () => {
     });
   };
 
-  
   const registerUser = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
       const response = await axios.post(
         `https://mern-blog-kappa-one.vercel.app/users/register`,
         userData
       );
-  
+
       if (response && response.data) {
         const newUser = response.data;
         console.log(newUser);
-        navigate('/');
+        toast.success("user register successfully ");
+        navigate("/login");
       } else {
         setError("Couldn't register. Please try again");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Couldn't register. Please try again");
+      // setError(
+      //   err.response?.data?.message || "Couldn't register. Please try again"
+      // )
+      toast.error(
+        err.response?.data?.message || "Couldn't register. Please try again"
+      );
     }
   };
-  
-  
-
-
-
-
-
 
   return (
     <section className="register">
@@ -54,11 +53,7 @@ const Register = () => {
         <h2>Sign Up</h2>
 
         <form className="form register_form" onSubmit={registerUser}>
-          {error && (
-            <p className="form_error-message">
-              {error}
-            </p>
-          )}
+          {error && <p className="form_error-message">{error}</p>}
           <input
             type="text"
             placeholder="Full Name"

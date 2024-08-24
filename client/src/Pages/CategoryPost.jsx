@@ -16,7 +16,7 @@ useEffect(()=>{
 
     try{
        
-     const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/posts/categories/${category}`)
+     const response = await axios.get(`https://mern-login-rouge.vercel.app/posts/categories/${category}`)
        setPosts(response?.data)
 
     }catch(err){

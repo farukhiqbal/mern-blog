@@ -27,9 +27,11 @@ const Login = () => {
       const response = await axios.post(`https://mern-blog-kappa-one.vercel.app/users/login`, userData);
       const user = response.data; 
       setCurrentUser(user);
+
       navigate('/');
     } catch (err) {
       setError(err.response.data.message);
+      console.log(err.response.data.message)
     }
   };
 

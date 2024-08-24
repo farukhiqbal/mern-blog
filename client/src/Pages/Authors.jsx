@@ -12,7 +12,7 @@ const Authors = () => {
    const getAuthors = async()=>{
         setLoading(true);
         try{
-    const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/users`)
+    const response = await axios.get(`https://mern-login-rouge.vercel.app/users`)
     setAuthors(response.data);
         }catch(error){
           console.log(error)

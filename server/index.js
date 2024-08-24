@@ -11,35 +11,27 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const app = express();
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "https://futurestack.vercel.app" }));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://futurestack.vercel.app");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://futurestack.vercel.app"
+  );
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("server is running ");
+});
 
-
-
-app.get('/', (req, res) => {
-  res.send("server is running ")
-
-})
-
-
-
-app.use(upload())
+app.use(upload());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
-
-
-
-
-
 
 connect(process.env.MONGO_URL)
   .then(

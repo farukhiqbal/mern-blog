@@ -13,7 +13,7 @@ useEffect(()=>{
 
     try{
        
-     const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/posts`)
+     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts`)
        setPosts(response?.data)
 
     }catch(err){

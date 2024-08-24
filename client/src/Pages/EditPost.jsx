@@ -62,7 +62,7 @@ const POST_CATEGORIES = ['Agriculture','Business','Education','Entertainment','A
 useEffect(()=>{
      const getPost = async() =>{
       try{
-        const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/posts/${id}`)
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${id}`)
        setTitle(response.data.title)
        setdescription(response.data.description)
       

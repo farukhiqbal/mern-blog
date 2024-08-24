@@ -18,6 +18,8 @@ import AuthorPost from './Pages/AuthorPost';
 import Dashboard from './Pages/Dashboard';
 import DeletePost from './Pages/DeletePost';
 import UserProvider from './context/userContext';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter ([
@@ -56,8 +58,10 @@ children:[
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  
+        {/* <ToastContainer> */}
+
   <RouterProvider router={router}/>
+        {/* </ToastContainer> */}
 
   </React.StrictMode>
 );
