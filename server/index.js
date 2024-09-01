@@ -14,10 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "https://futurestack.vercel.app/" }));
 
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://futurestack.vercel.app/"
+  res.header("Access-Control-Allow-Origin", "https://futurestack.vercel.app");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
 
