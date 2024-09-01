@@ -1,46 +1,50 @@
-import React, { useState,useEffect } from 'react'
-import axios from 'axios';
-import Loader from '../Components/Loader';
-import Postitem from '../Components/Postitem'
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Loader from "../Components/Loader";
+import Postitem from "../Components/Postitem";
+import { useParams } from "react-router-dom";
 
-const  CategoryPost = () => { 
+const CategoryPost = () => {
   const [posts, setPosts] = useState([]);
-  const [ loading, setLoading] = useState(false)
-  
-   const {category} = useParams()
+  const [loading, setLoading] = useState(false);
 
-useEffect(()=>{
-  const fetchPosts = async () => {
-    setLoading(true);
+  const { category } = useParams();
 
-    try{
-       
-     const response = await axios.get(`https://mern-login-rouge.vercel.app/posts/categories/${category}`)
-       setPosts(response?.data)
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
 
-    }catch(err){
-       console.log(err)
-    }
-            setLoading(false)
+      try {
+        const response = await axios.get(
+          `https://mern-blog-kappa-one.vercel.app/posts/categories/${category}`
+        );
+        setPosts(response?.data);
+      } catch (err) {
+        console.log(err);
+      }
+      setLoading(false);
+    };
+    fetchPosts();
+  }, [category]);
+
+  if (loading) {
+    return <Loader />;
   }
-  fetchPosts();
-},[category])
-
-
-
-   if(loading){
-    return  <Loader/>
-   }
-
-
 
   return (
     <section className="posts">
       {posts.length > 0 ? (
         <div className="container posts_container">
           {posts.map(
-            ({ _id: id, thumbnail, title, description, category, creator,createdAt }) => (
+            ({
+              _id: id,
+              thumbnail,
+              title,
+              description,
+              category,
+              creator,
+              createdAt,
+            }) => (
               <Postitem
                 key={id}
                 postID={id}
@@ -59,6 +63,6 @@ useEffect(()=>{
       )}
     </section>
   );
-}
+};
 
-export default  CategoryPost
+export default CategoryPost;

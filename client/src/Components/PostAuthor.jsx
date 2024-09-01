@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
-import ru from 'javascript-time-ago/locale/ru';
-import ReactTimeAgo from 'react-timeago';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import ru from "javascript-time-ago/locale/ru";
+import ReactTimeAgo from "react-timeago";
 
 TimeAgo.addLocale(en);
 TimeAgo.addLocale(ru);
@@ -16,7 +16,7 @@ const PostAuthor = ({ authorID, createdAt }) => {
     const getAuthor = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/users/${authorID}`
+          `https://mern-blog-kappa-one.vercel.app/users/${authorID}`
         );
         setAuthor(response?.data);
       } catch (error) {
@@ -24,11 +24,11 @@ const PostAuthor = ({ authorID, createdAt }) => {
       }
     };
 
-    getAuthor(); 
+    getAuthor();
   }, []);
 
   return (
-    <Link to={`/posts/users/${authorID}`} className='post_author'>
+    <Link to={`/posts/users/${authorID}`} className="post_author">
       <div className="post_author-avatar">
         {author?.avatar && (
           <img
