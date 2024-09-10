@@ -12,7 +12,7 @@ const Authors = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://mern-blog-kappa-one.vercel.app/users`
+          `${process.env.REACT_APP_BASE_URL}/users`
         );
         setAuthors(response.data);
       } catch (error) {

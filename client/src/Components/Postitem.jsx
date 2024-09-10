@@ -27,7 +27,7 @@ const Postitem = ({
     <article className="post">
       <div className="post_thumbnail">
         <img
-          src={`https://mern-blog-kappa-one.vercel.app/uploads/${thumbnail}`}
+          src={`${process.env.REACT_APP_BASE_URL}/uploads/${thumbnail}`}
           alt={title}
         />
       </div>
@@ -45,7 +45,7 @@ const Postitem = ({
         <div className="post_footer">
           <PostAuthor authorID={authorID} createdAt={createdAt} />
           <Link
-            to={`https://mern-blog-kappa-one.vercel.app/Posts/categories/${category}`}
+            to={`${process.env.REACT_APP_BASE_URL}/Posts/categories/${category}`}
             className="btn category"
           >
             {category}

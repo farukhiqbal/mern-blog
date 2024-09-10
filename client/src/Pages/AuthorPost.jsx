@@ -16,7 +16,7 @@ const AuthorPost = () => {
 
       try {
         const response = await axios.get(
-          `https://mern-blog-kappa-one.vercel.app/posts/users/${id}`
+          `${process.env.REACT_APP_BASE_URL}/posts/users/${id}`
         );
         setPosts(response?.data);
       } catch (err) {

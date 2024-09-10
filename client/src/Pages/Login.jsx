@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext.js";
-import axios from 'axios';
+import axios from "axios";
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -22,16 +22,19 @@ const Login = () => {
   // Login user
   const loginUser = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
-      const response = await axios.post(`https://mern-blog-kappa-one.vercel.app/users/login`, userData);
-      const user = response.data; 
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/login`,
+        userData
+      );
+      const user = response.data;
       setCurrentUser(user);
 
-      navigate('/');
+      navigate("/");
     } catch (err) {
       setError(err.response.data.message);
-      console.log(err.response.data.message)
+      console.log(err.response.data.message);
     }
   };
 

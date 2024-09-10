@@ -20,10 +20,9 @@ const PostDetail = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://mern-blog-kappa-one.vercel.app/posts/${id}`
+          `${process.env.REACT_APP_BASE_URL}/posts/${id}`
         );
         setPost(response.data);
-      
       } catch (error) {
         setError(error);
       }
@@ -44,7 +43,7 @@ const PostDetail = () => {
       {post && (
         <div className="container post-detail_contain">
           <div className="post-detail_header">
-            <PostAuthor authorID={post.creator}  createdAt={post.createdAt}   />
+            <PostAuthor authorID={post.creator} createdAt={post.createdAt} />
             {currentUser?.id == post?.creator && (
               <div className="post-detail_buttons">
                 <Link
@@ -53,16 +52,19 @@ const PostDetail = () => {
                 >
                   Edit
                 </Link>
-                <DeletePost  postId={id} />
+                <DeletePost postId={id} />
               </div>
-             )} 
+            )}
           </div>
 
           <h1>{post.title}</h1>
           <div className="post-detail_thumbnail">
-            <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${post.thumbnail}`} alt={post.title} />
+            <img
+              src={`${process.env.REACT_APP_BASE_URL}/uploads/${post.thumbnail}`}
+              alt={post.title}
+            />
           </div>
-            <p dangerouslySetInnerHTML={{__html: post.description}}></p>
+          <p dangerouslySetInnerHTML={{ __html: post.description }}></p>
         </div>
       )}
     </section>

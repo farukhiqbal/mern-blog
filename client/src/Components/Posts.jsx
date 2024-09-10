@@ -13,7 +13,7 @@ const Posts = () => {
 
       try {
         const response = await axios.get(
-          `https://mern-blog-kappa-one.vercel.app/posts`
+          `${process.env.REACT_APP_BASE_URL}/posts`
         );
         setPosts(response?.data);
       } catch (err) {

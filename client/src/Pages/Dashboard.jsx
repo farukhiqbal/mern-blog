@@ -29,7 +29,7 @@ const Dashboard = () => {
           const fetchPosts = async() =>{
             setLoading(true);
             try{
-               const response = await axios.get(`https://mern-blog-kappa-one.vercel.app/posts/users/${id}`,
+               const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/posts/users/${id}`,
                {withCredentials:true,headers:{Authorization:`Bearer${token}`}})    
                setPosts(response.data)
             }catch(error){
