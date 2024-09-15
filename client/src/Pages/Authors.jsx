@@ -36,7 +36,7 @@ const Authors = () => {
               <Link key={id} to={`/posts/users/${id}`} className="author">
                 <div className="author_avatar">
                   <img
-                    src={`https://mern-blog-kappa-one.vercel.app/uploads/${avatar}`}
+                    src={`${process.env.REACT_APP_BASE_URL}/uploads/${avatar}`}
                     alt={`Image of ${name}`}
                   />
                 </div>

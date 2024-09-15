@@ -32,7 +32,7 @@ const PostAuthor = ({ authorID, createdAt }) => {
       <div className="post_author-avatar">
         {author?.avatar && (
           <img
-            src={`https://mern-blog-kappa-one.vercel.app/uploads/${author.avatar}`}
+            src={`${process.env.REACT_APP_BASE_URL}/uploads/${author.avatar}`}
             alt=""
           />
         )}

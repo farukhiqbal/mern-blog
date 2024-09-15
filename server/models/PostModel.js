@@ -1,28 +1,29 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require("mongoose");
 
+const postSchema = new Schema(
+  {
+    title: { type: String, require: true },
 
-const postSchema  = new Schema ({
+    category: {
+      type: String,
+      enum: [
+        "Agriculture",
+        "Business",
+        "Education",
+        "Entertainment",
+        "Investment",
+        "IT",
+        "Art",
+        "Uncategorized",
+        "Weather",
+      ],
+      message: "{Value in not supported",
+    },
+    description: { type: String, require: true },
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
+    thumbnail: { type: String, require: true },
+  },
+  { timestamps: true }
+);
 
-    title:{ type:String, require:true },
-
-    category:{type:String,enum:[
-        "Agriculture","Business","Education","Entertainment","Investment"
-        ,"Art","Uncategorized","Weather"
-    ] ,
-     message:"{Value in not supported"    },
-      description:{type:String,require:true },
-    creator:{type: Schema.Types.ObjectId,ref:"User" },
-    thumbnail:{ type:String, require:true },
-    
-},{timestamps:true})
-
-
-module.exports = model("Post",postSchema)
-
-
-
-
-
-
-
-
+module.exports = model("Post", postSchema);

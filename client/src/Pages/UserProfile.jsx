@@ -7,7 +7,7 @@ import { UserContext } from "../context/userContext";
 import axios from "axios";
 
 const UserProfile = () => {
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState("");
 
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -20,26 +20,21 @@ const UserProfile = () => {
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
-
-const changeAvatarHandler = async()=>{
-
-setIsAvatarTouched(false);
-try{
- 
-   const postData = new FormData();
-   postData.set('avatar',avatar);
-   const response = await axios.post(`https://mern-blog-kappa-one.vercel.app/users/change-avatar`,
-   postData,{withCredentials:true,headers:{Authorization:`Bearer${token}`}})   
-   setAvatar(response?.data.avatar)
-}catch(error){
-       console.log(error)
-}
-
-
-}
-
-
-
+  const changeAvatarHandler = async () => {
+    setIsAvatarTouched(false);
+    try {
+      const postData = new FormData();
+      postData.set("avatar", avatar);
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
+        postData,
+        { withCredentials: true, headers: { Authorization: `Bearer${token}` } }
+      );
+      setAvatar(response?.data.avatar);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="profile">
@@ -51,7 +46,10 @@ try{
         <div className="profile_details">
           <div className="avatar_wrapper">
             <div className="profile_avatar">
-              <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${avatar}`} alt="" />
+              <img
+                src={`${process.env.REACT_APP_BASE_URL}/uploads/${avatar}`}
+                alt=""
+              />
             </div>
 
             {/* from update avatar */}
@@ -64,16 +62,19 @@ try{
                 onChange={(e) => setAvatar(e.target.files[0])}
                 accept="png,jpg,jpeg"
               />
-              <label htmlFor="avatar" onClick={()=> setIsAvatarTouched(true)}>
+              <label htmlFor="avatar" onClick={() => setIsAvatarTouched(true)}>
                 <FaEdit />
               </label>
             </form>
 
-            {isAvatarTouched && 
-              <button className="profile_avatar-btn" onClick={changeAvatarHandler}>
+            {isAvatarTouched && (
+              <button
+                className="profile_avatar-btn"
+                onClick={changeAvatarHandler}
+              >
                 <FaCheck />
               </button>
-            }
+            )}
           </div>
 
           <h1>{currentUser.name}</h1>
