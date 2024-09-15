@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: 'https://futurestack.vercel.app',
+  origin: 'http://localhost:3000/',
   methods: 'GET,POST,PUT,DELETE',
   credentials: true,
 }));
@@ -23,8 +23,8 @@ app.get("/", (req, res) => {
 
 app.use(upload());
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use("/users", userRoutes);
-app.use("/posts", postRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
