@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext.js";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; // Import the toastify CSS
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -11,7 +13,7 @@ const Login = () => {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setCurrentUser } = useContext(UserContext); // Use useContext here
+  const { setCurrentUser } = useContext(UserContext);
 
   const changeInputHandler = (e) => {
     setUserData((prevState) => {
@@ -31,10 +33,32 @@ const Login = () => {
       const user = response.data;
       setCurrentUser(user);
 
+      toast.success("Login successful!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
       navigate("/");
     } catch (err) {
-      setError(err.response.data.message);
-      console.log(err.response.data.message);
+      const errorMessage = err.response?.data?.message || "Login failed!";
+      setError(errorMessage);
+
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      console.log(errorMessage);
     }
   };
 
@@ -71,6 +95,9 @@ const Login = () => {
           Don't have an account?<Link to="/register">Sign up </Link>
         </small>
       </div>
+
+      {/* Toast container to display the toast notifications */}
+      <ToastContainer />
     </section>
   );
 };
