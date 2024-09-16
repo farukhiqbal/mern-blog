@@ -87,20 +87,27 @@ const EditPost = () => {
     postData.set("category", category);
     postData.set("description", description);
     postData.set("thumbnail", thumbnail);
-
+  
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/posts/${id}`,
         postData,
         { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
-      if (response.status == 200) {
+      if (response.status === 200) {
         return navigate("/");
       }
     } catch (err) {
-      setError(err.response.data.message);
+      // Check if err.response exists before accessing it
+      if (err.response && err.response.data) {
+        setError(err.response.data.message);
+      } else {
+        setError("An error occurred while updating the post.");
+        console.error("Error details:", err);
+      }
     }
   };
+  
 
   return (
     <section className="create-post">

@@ -60,7 +60,7 @@ const Dashboard = () => {
 return <article key={posts.id} className='dashboard_post'>
     <div className="dashboard_post-info">
       <div className="dashboard_post-thumbnail">
-        <img src={`https://mern-blog-kappa-one.vercel.app/uploads/${posts.thumbnail}`} alt="" />
+        <img src={`${process.env.REACT_APP_BASE_URL}/uploads/${posts.thumbnail}`} alt="" />
       </div>
       <h5>{posts.title}</h5>
     </div>

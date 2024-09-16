@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Avatar from "../images/avatar15.jpg";
+// import Avatar from "../images/avatar15.jpg";
 import { FaEdit } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { UserContext } from "../context/userContext";
@@ -8,31 +8,38 @@ import axios from "axios";
 
 const UserProfile = () => {
   const [avatar, setAvatar] = useState("");
-
-  const [name, setname] = useState("");
-  const [email, setemail] = useState("");
-  const [currentpassword, setcurrentpassword] = useState("");
-  const [newpassword, setnewpassword] = useState("");
-  const [confirmNewPassword, setconfirmNewPassword] = useState("");
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [isAvatarTouched, setIsAvatarTouched] = useState(false);
 
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
 
   const changeAvatarHandler = async () => {
-    setIsAvatarTouched(false);
+    setIsAvatarTouched(false); // reset the avatar change state
+
     try {
       const postData = new FormData();
-      postData.set("avatar", avatar);
+      postData.set("avatar", avatar); // Make sure avatar is correctly set as a file
+
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/users/change-avatar`,
         postData,
-        { withCredentials: true, headers: { Authorization: `Bearer${token}` } }
+        {
+          withCredentials: true,
+          headers: { 
+            Authorization: `Bearer ${token}` // Ensure there is a space between Bearer and the token
+          },
+        }
       );
-      setAvatar(response?.data.avatar);
+
+      // Update the avatar state with the filename or path returned from the server
+      setAvatar(response?.data.avatar); 
     } catch (error) {
-      console.log(error);
+      console.error("Error uploading avatar:", error);
     }
   };
 
@@ -46,21 +53,21 @@ const UserProfile = () => {
         <div className="profile_details">
           <div className="avatar_wrapper">
             <div className="profile_avatar">
+              {/* Ensure the image URL is correctly constructed */}
               <img
-                src={`${process.env.REACT_APP_BASE_URL}/uploads/${avatar}`}
-                alt=""
+                src={ avatar ? `${process.env.REACT_APP_BASE_URL}/uploads/${avatar} `: ''} 
+                alt="User Avatar"
               />
             </div>
 
-            {/* from update avatar */}
-
-            <form action="" className="avatar_form">
+            {/* Form for updating the avatar */}
+            <form className="avatar_form">
               <input
                 type="file"
                 name="avatar"
                 id="avatar"
-                onChange={(e) => setAvatar(e.target.files[0])}
-                accept="png,jpg,jpeg"
+                onChange={(e) => setAvatar(e.target.files[0])} // Handle file input correctly
+                accept="image/png, image/jpg, image/jpeg" // Correct format for accepted file types
               />
               <label htmlFor="avatar" onClick={() => setIsAvatarTouched(true)}>
                 <FaEdit />
@@ -79,49 +86,43 @@ const UserProfile = () => {
 
           <h1>{currentUser.name}</h1>
 
-          {/* form to update  user details  */}
-
-          <form action="" className="form profile_form">
-            <p className="form_error-message">This is an error message</p>
+          {/* Form to update user details */}
+          <form className="form profile_form">
+            {/* <p className="form_error-message">This is an error message</p> */}
 
             <input
               type="text"
               placeholder="Full Name"
-              id=""
               value={name}
-              onChange={(e) => setname(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               type="email"
-              placeholder="Enter Your email"
-              id=""
+              placeholder="Enter Your Email"
               value={email}
-              onChange={(e) => setemail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
-              placeholder="current password"
-              id=""
-              value={currentpassword}
-              onChange={(e) => setcurrentpassword(e.target.value)}
+              placeholder="Current Password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
             />
             <input
               type="password"
-              placeholder="New password"
-              id=""
-              value={newpassword}
-              onChange={(e) => setnewpassword(e.target.value)}
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
             <input
               type="password"
-              placeholder="confirm new  password"
-              id=""
+              placeholder="Confirm New Password"
               value={confirmNewPassword}
-              onChange={(e) => setconfirmNewPassword(e.target.value)}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
             />
 
             <button type="submit" className="btn primary">
-              Update details
+              Update Details
             </button>
           </form>
         </div>

@@ -45,7 +45,7 @@ const Postitem = ({
         <div className="post_footer">
           <PostAuthor authorID={authorID} createdAt={createdAt} />
           <Link
-            to={`${process.env.REACT_APP_BASE_URL}/Posts/categories/${category}`}
+            to={`/posts/categories/${category}`}
             className="btn category"
           >
             {category}
